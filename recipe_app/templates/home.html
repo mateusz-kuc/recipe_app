@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+
+{% block body%}
+<h1>Home</h1>
+<div class="card card-body" >
+
+    <table class="table table-sm">
+      <tr>
+
+        <th>
+          <form method="POST">
+                      <input type="text" name="name"  value={{request.form.name}}>
+                      <button type="submit" class="btn btn-sm btn-info   ">Search recipe</button>
+          </form>
+        </th>
+        <th></th>
+
+      </tr>
+      {% for recipe in  all_recipe %}
+        <tr>
+
+
+
+          <td> <h3>{{recipe.title}}</h3>
+            <br>
+            <img id="image" src="{{recipe.picture}}" alt="Responsive image">
+
+
+          </td>
+          <td><a href="{{recipe.youtube}}"><img id="icon" src="{{ url_for('static', filename='pictures/icon.png')}}"</a></td>
+          <td><a class="btn  btn-info  " href="{{url_for('recipe_page',id=recipe.id)}}">Go to recipe</a> </td>
+
+
+        </tr>
+      {% endfor %}
+
+    </table>
+  </div>
+</div>
+
+</div>
+{%endblock%}

@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+
+{% block body%}
+<h1>History</h1>
+<table class="table table-sm">
+  <tr>
+    <th>Name</th>
+    <th> Date</th>
+    <th></th>
+  </tr>
+  {% for element in history.items %}
+  <tr>
+
+
+    <td>{{element.title}}</td>
+    <td>{{element.date_searched.strftime("%m/%d/%Y, %H:%M:%S")}}</td>
+    <td><a class="btn btn-info" href="{{url_for('recipe_page',id=element.recipe_id)}}">Go to recipe</a></td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+
+
+{% for page_num in history.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+  {% if page_num %}
+    {% if history.page == page_num %}
+      <a class="btn btn-info mb-4" href="{{ url_for('history', page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+      <a class="btn btn-outline-info mb-4" href="{{ url_for('history', page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+  {% else %}
+    ...
+  {% endif %}
+{% endfor %}
+{%endblock%}

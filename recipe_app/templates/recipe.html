@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+
+{% block body%}
+<article class="media content-section">
+
+  <div class="media-body">
+    <div class="article-metadata">
+
+
+    </div>
+    <h2 class="article-title">{{recipe.title}}</h2>
+    <hr>
+    <img class="img-fluid" src={{recipe.picture}}>
+    <p class="article-content">
+      <table class="table table-sm">
+      <tr>
+      <th>Ingredients</th>
+      <th>Measures</th>
+      </tr>
+      <tr>
+      <td>
+      {% for ingredient in recipe.ingredients %}
+      {{ingredient}}
+      <br>
+      {% endfor %}
+      </td>
+      <td>
+      {% for measure in recipe.measures %}
+      {{measure}}
+      <br>
+      {% endfor %}
+      </td>
+      </tr>
+      <hr>
+      {{recipe.instruction}}
+      {% if saved%}
+      <td><div class="btn btn-info" href="">Saved </div></td>
+      {% else %}
+      <td><a class="btn btn-info" href="{{url_for('save',id=id)}}">Save</a></td>
+      {% endif %}
+    </p>
+  </div>
+</article>
+{%endblock%}
